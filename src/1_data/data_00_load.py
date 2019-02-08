@@ -1,12 +1,21 @@
 # %% {"_uuid": "2cea35de3530cc898be5b85063b84e875401d092"}
-os.listdir("../input/")
+
+PATH_INPUT = Path.cwd() / 'input'
+assert PATH_INPUT.exists()
 
 # %% {"_uuid": "46a8839e13a14eb8d16ea6823de9927ea63d5001"}
-train_df = pd.read_csv("../input/train.csv")
+train_df = pd.read_csv(PATH_INPUT / 'train.csv')
 train_df.head()
 
 
 # %% {"_uuid": "f46b24dbba74f22833cac6140e60348b15a8e047"}
+
+# data=train_df
+# m = train_df.shape[0]
+# dataset = "train"
+
+
+
 def prepareImages(data, m, dataset):
     print("Preparing images")
     X_train = np.zeros((m, 100, 100, 3))
@@ -14,7 +23,7 @@ def prepareImages(data, m, dataset):
 
     for fig in data['Image']:
         # load images into images of size 100x100x3
-        img = image.load_img("../input/" + dataset + "/" + fig, target_size=(100, 100, 3))
+        img = image.load_img(PATH_INPUT / dataset / fig, target_size=(100, 100, 3))
         x = image.img_to_array(img)
         x = preprocess_input(x)
 

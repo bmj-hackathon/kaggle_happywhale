@@ -12,6 +12,8 @@ pandas = "*"
 matplotlib = "*"
 scikit-learn = "*"
 tensorflow-gpu = "*"
+keras = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"
