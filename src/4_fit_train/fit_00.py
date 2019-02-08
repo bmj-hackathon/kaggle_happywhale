@@ -7,7 +7,8 @@ plt.xlabel('Epoch')
 plt.show()
 
 # %% {"_uuid": "debe961c93b72bef151d9aad3ca2cb500ee00aaa"}
-test = os.listdir("../input/test/")
+PATH_TEST = PATH_INPUT / 'test'
+test = [f.name for f in PATH_TEST.iterdir()]
 print(len(test))
 
 # %% {"_uuid": "72ed8198f519f7b1ae3efbc688933c78d8cdd0e4"}

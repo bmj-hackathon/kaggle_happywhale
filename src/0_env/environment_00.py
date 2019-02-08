@@ -19,4 +19,5 @@ import keras.backend as K
 from keras.models import Sequential
 from pathlib import Path
 import warnings
+import gc
 warnings.simplefilter("ignore", category=DeprecationWarning)
