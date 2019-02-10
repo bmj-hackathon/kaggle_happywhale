@@ -1,3 +1,31 @@
+#%% ===========================================================================
+# Logging
+# =============================================================================
+import sys
+import logging
+
+#Delete Jupyter notebook root logger handler
+logger = logging.getLogger()
+logger.handlers = []
+
+# Set level
+logger.setLevel(logging.INFO)
+
+# Create formatter
+#FORMAT = "%(asctime)s - %(levelno)-3s - %(module)-10s  %(funcName)-10s: %(message)s"
+#FORMAT = "%(asctime)s - %(levelno)-3s - %(funcName)-10s: %(message)s"
+#FORMAT = "%(asctime)s - %(funcName)-10s: %(message)s"
+FORMAT = "%(asctime)s : %(message)s"
+DATE_FMT = "%Y-%m-%d %H:%M:%S"
+#DATE_FMT = "%H:%M:%S"
+formatter = logging.Formatter(FORMAT, DATE_FMT)
+
+# Create handler and assign
+handler = logging.StreamHandler(sys.stderr)
+handler.setFormatter(formatter)
+logger.handlers = [handler]
+logging.info("Logging started")
+
 #%%
 import os
 
@@ -6,6 +34,7 @@ import gc
 warnings.simplefilter("ignore", category=DeprecationWarning)
 
 from pathlib import Path
+
 #%%
 import numpy as np
 import pandas as pd
@@ -33,3 +62,12 @@ import keras.backend as K
 from keras.models import Sequential
 
 #%%
+#%%
+
+def mm2inch(value):
+    return value/25.4
+PAPER = {
+    "A3_LANDSCAPE" : (mm2inch(420),mm2inch(297)),
+    "A4_LANDSCAPE" : (mm2inch(297),mm2inch(210)),
+    "A5_LANDSCAPE" : (mm2inch(210),mm2inch(148)),
+}
