@@ -15,7 +15,7 @@ logger.setLevel(logging.INFO)
 #FORMAT = "%(asctime)s - %(levelno)-3s - %(module)-10s  %(funcName)-10s: %(message)s"
 #FORMAT = "%(asctime)s - %(levelno)-3s - %(funcName)-10s: %(message)s"
 #FORMAT = "%(asctime)s - %(funcName)-10s: %(message)s"
-FORMAT = "%(asctime)s : %(message)s"
+FORMAT = "%(levelno)-2s %(asctime)s : %(message)s"
 DATE_FMT = "%Y-%m-%d %H:%M:%S"
 #DATE_FMT = "%H:%M:%S"
 formatter = logging.Formatter(FORMAT, DATE_FMT)
