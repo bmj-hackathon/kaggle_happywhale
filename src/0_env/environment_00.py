@@ -4,7 +4,6 @@
 import sys
 import logging
 
-#Delete Jupyter notebook root logger handler
 logger = logging.getLogger()
 logger.handlers = []
 
@@ -12,12 +11,8 @@ logger.handlers = []
 logger.setLevel(logging.INFO)
 
 # Create formatter
-#FORMAT = "%(asctime)s - %(levelno)-3s - %(module)-10s  %(funcName)-10s: %(message)s"
-#FORMAT = "%(asctime)s - %(levelno)-3s - %(funcName)-10s: %(message)s"
-#FORMAT = "%(asctime)s - %(funcName)-10s: %(message)s"
 FORMAT = "%(levelno)-2s %(asctime)s : %(message)s"
 DATE_FMT = "%Y-%m-%d %H:%M:%S"
-#DATE_FMT = "%H:%M:%S"
 formatter = logging.Formatter(FORMAT, DATE_FMT)
 
 # Create handler and assign

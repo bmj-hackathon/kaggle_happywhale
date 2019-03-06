@@ -24,7 +24,6 @@ font_steering = {'family': 'monospace',
                  }
 
 
-
 #%%
 ROWS = 3
 COLS = 3
