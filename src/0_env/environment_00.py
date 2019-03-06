@@ -44,6 +44,8 @@ from matplotlib.pyplot import imshow
 import sklearn as sk
 import sklearn.preprocessing
 
+import tensorflow as tf
+
 #%%
 import keras as ks
 from keras import layers
