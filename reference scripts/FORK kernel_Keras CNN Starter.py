@@ -12,7 +12,8 @@ from matplotlib.pyplot import imshow
 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
-import tensroflow as tf
+import tensorflow
+raise
 from keras import layers
 from keras.preprocessing import image
 from keras.applications.imagenet_utils import preprocess_input
