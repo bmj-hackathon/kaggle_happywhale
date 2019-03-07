@@ -1,17 +1,3 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.2'
-#       jupytext_version: 0.8.6
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
 # %% [markdown] {"_uuid": "da035fe58e548e8b1b7e8e89725b9e6bc745aa7b"}
 # # Humpback Whale Identification - CNN with Keras
 # This kernel is based on [Anezka Kolaceke](https://www.kaggle.com/anezka)'s awesome work: [CNN with Keras for Humpback Whale ID](https://www.kaggle.com/anezka/cnn-with-keras-for-humpback-whale-id)
@@ -26,7 +12,7 @@ from matplotlib.pyplot import imshow
 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
-
+import tensroflow as tf
 from keras import layers
 from keras.preprocessing import image
 from keras.applications.imagenet_utils import preprocess_input
