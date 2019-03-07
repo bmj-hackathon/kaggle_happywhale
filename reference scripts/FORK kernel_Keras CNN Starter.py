@@ -2,6 +2,16 @@
 # # Humpback Whale Identification - CNN with Keras
 # This kernel is based on [Anezka Kolaceke](https://www.kaggle.com/anezka)'s awesome work: [CNN with Keras for Humpback Whale ID](https://www.kaggle.com/anezka/cnn-with-keras-for-humpback-whale-id)
 
+import os
+from pathlib import Path
+# os.environ["PATH"] = "/usr/local/cuda-9.0/bin" + os.pathsep + os.environ["PATH"]
+# os.environ['LD_LIBRARY_PATH'] = "/usr/local/cuda/lib64"
+assert "LD_LIBRARY_PATH" in os.environ
+assert "/usr/local/cuda-9.0/bin" in [p for p in os.environ['PATH'].split(':')]
+# for e in os.environ['PATH'].split(':'):
+#     print(e)
+
+
 # %% {"_uuid": "0d9c73ad23e6c2eae3028255ee00c3254fe66401"}
 import numpy as np 
 import pandas as pd 
@@ -12,26 +22,37 @@ from matplotlib.pyplot import imshow
 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
-import tensorflow
-raise
-from keras import layers
-from keras.preprocessing import image
+import tensorflow as tf
+# import tensorflow.keras as keras
+import keras
+from tensorflow.keras import layers
+from tensorflow.keras.preprocessing import image
+# import
+# dir(tf.keras.applications)
 from keras.applications.imagenet_utils import preprocess_input
-from keras.layers import Input, Dense, Activation, BatchNormalization, Flatten, Conv2D
-from keras.layers import AveragePooling2D, MaxPooling2D, Dropout
-from keras.models import Model
+# tf.keras.applications.imagenet_utils
 
-import keras.backend as K
-from keras.models import Sequential
+from tensorflow.keras.layers import Input, Dense, Activation, BatchNormalization, Flatten, Conv2D
+from tensorflow.keras.layers import AveragePooling2D, MaxPooling2D, Dropout
+from tensorflow.keras.models import Model
+
+import tensorflow.keras.backend as K
+from tensorflow.keras.models import Sequential
 
 import warnings
 warnings.simplefilter("ignore", category=DeprecationWarning)
 
+
+print("tensorflow", tf.VERSION)
+print("keras", tf.keras.__version__)
+
 # %% {"_uuid": "2cea35de3530cc898be5b85063b84e875401d092"}
-os.listdir("../input/")
+INPUT_DIR = Path('./input')
+assert INPUT_DIR.exists()
+os.listdir(INPUT_DIR)
 
 # %% {"_uuid": "46a8839e13a14eb8d16ea6823de9927ea63d5001"}
-train_df = pd.read_csv("../input/train.csv")
+train_df = pd.read_csv(INPUT_DIR/ "train.csv")
 train_df.head()
 
 # %% {"_uuid": "f46b24dbba74f22833cac6140e60348b15a8e047"}
@@ -42,7 +63,9 @@ def prepareImages(data, m, dataset):
     
     for fig in data['Image']:
         #load images into images of size 100x100x3
-        img = image.load_img("../input/"+dataset+"/"+fig, target_size=(100, 100, 3))
+        this_path = INPUT_DIR / dataset / fig
+        img = image.load_img(this_path, target_size=(100, 100, 3))
+        # img = image.load_img(INPUT_DIR+dataset+"/"+fig, target_size=(100, 100, 3))
         x = image.img_to_array(img)
         x = preprocess_input(x)
 
