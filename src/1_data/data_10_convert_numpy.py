@@ -28,7 +28,7 @@ def prepareImages(df_data, num_images, folder_path):
 # %%
 def prepare_labels(y):
     values = np.array(y)
-    label_encoder = LabelEncoder()
+    label_encoder = sk.preprocessing.LabelEncoder()
     integer_encoded = label_encoder.fit_transform(values)
     # print(integer_encoded)
 
@@ -43,11 +43,16 @@ def prepare_labels(y):
 
 
 # %%
-X = prepareImages(train_df, train_df.shape[0], PATH_INPUT / "train")
-X /= 255
+X_tr = prepareImages(df_tr, df_tr.shape[0], PATH_INPUT / "train")
+X_tr /= 255
+
+X_cv = prepareImages(df_cv, df_cv.shape[0], PATH_INPUT / "train")
+X_cv /= 255
 
 # %%
-y, label_encoder = prepare_labels(train_df['Id'])
+y_tr, label_encoder_tr = prepare_labels(df_tr['Id'])
+y_cv, label_encoder_cv = prepare_labels(df_cv['Id'])
 
 # %% {"_uuid": "14d243b19023e830b636bea16679e13bc40deae6"}
-y.shape
+y_tr.shape
+y_cv.shape
