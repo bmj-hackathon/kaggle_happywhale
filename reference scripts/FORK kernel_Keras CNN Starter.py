@@ -22,9 +22,11 @@ from matplotlib.pyplot import imshow
 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
+
 import tensorflow as tf
-# import tensorflow.keras as keras
+
 import keras
+
 from tensorflow.keras import layers
 from tensorflow.keras.preprocessing import image
 # import

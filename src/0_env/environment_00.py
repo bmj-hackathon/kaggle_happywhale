@@ -22,15 +22,22 @@ logger.handlers = [handler]
 logging.info("Logging started")
 
 #%%
-import os
-
 import warnings
 import gc
 warnings.simplefilter("ignore", category=DeprecationWarning)
 
 from pathlib import Path
 
+
 #%%
+# Ensure CUDA paths!
+import os
+from pathlib import Path
+assert "LD_LIBRARY_PATH" in os.environ
+assert "/usr/local/cuda-9.0/bin" in [p for p in os.environ['PATH'].split(':')]
+
+#%%
+# Scientific stack
 import numpy as np
 import pandas as pd
 import matplotlib as mpl
@@ -39,26 +46,35 @@ import matplotlib.image as mplimg
 from matplotlib.pyplot import imshow
 
 
-# from sklearn.preprocessing import LabelEncoder
-# from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 import sklearn as sk
 import sklearn.preprocessing
 
+# %%
+# Deep learning stack
+# TODO: This should also be available in tensorflow, eliminate the keras dep
+from keras.applications.imagenet_utils import preprocess_input
+
 import tensorflow as tf
 
-#%%
-import keras as ks
-from keras import layers
-from keras.preprocessing import image
-from keras.applications.imagenet_utils import preprocess_input
-from keras.layers import Input, Dense, Activation, BatchNormalization, Flatten, Conv2D
-from keras.layers import AveragePooling2D, MaxPooling2D, Dropout
-from keras.models import Model
+# tf.keras.layers
 
-import keras.backend as K
-from keras.models import Sequential
 
-#%%
+# from tensorflow.keras import layers
+# from tensorflow.keras.preprocessing import image
+# import
+# dir(tf.keras.applications)
+# from keras.applications.imagenet_utils import preprocess_input
+# tf.keras.applications.imagenet_utils
+
+# from tensorflow.keras.layers import Input, Dense, Activation, BatchNormalization, Flatten, Conv2D
+# from tensorflow.keras.layers import AveragePooling2D, MaxPooling2D, Dropout
+# from tensorflow.keras.models import Model
+#
+# import tensorflow.keras.backend as K
+# from tensorflow.keras.models import Sequential
+
 #%%
 
 def mm2inch(value):
