@@ -4,12 +4,12 @@ PATH_INPUT = Path.cwd() / 'input'
 assert PATH_INPUT.exists()
 
 # %%
-df_tr = pd.read_csv(PATH_INPUT / 'train.csv')
+df_all = pd.read_csv(PATH_INPUT / 'train.csv')
 # train_df.head()
-logging.info("Train {}".format(df_tr.shape))
+logging.info("Train {}".format(df_all.shape))
 # %%
 
-df_tr.sample(10)
+df_all.sample(10)
 
 #%% SETTINGS
 
@@ -28,7 +28,7 @@ ROWS = 4
 COLS = 3
 NUM_IMAGES = ROWS * COLS
 
-sel_img_fnames = [row[1]['Image'] for row in df_tr.sample(NUM_IMAGES).iterrows()]
+sel_img_fnames = [row[1]['Image'] for row in df_all.sample(NUM_IMAGES).iterrows()]
 sel_img_paths = [PATH_INPUT / 'train' / name for name in sel_img_fnames]
 assert all([p.exists() for p in sel_img_paths])
 assert len(sel_img_paths) % 2 == 0
