@@ -5,15 +5,16 @@
 # m = train_df.shape[0]
 # dataset = "train"
 
-def prepareImages(data, m, dataset):
+def prepareImages(df_data, num_images, folder_path):
     print("Preparing images")
-    X_train = np.zeros((m, 100, 100, 3))
+    X_train = np.zeros((num_images, 100, 100, 3))
     count = 0
 
-    for fig in data['Image']:
+    for fig in df_data['Image']:
         # load images into images of size 100x100x3
-        img = image.load_img(PATH_INPUT / dataset / fig, target_size=(100, 100, 3))
-        x = image.img_to_array(img)
+
+        img = tf.keras.preprocessing.image.load_img( folder_path / fig, target_size=(100, 100, 3))
+        x = tf.keras.preprocessing.image.img_to_array(img)
         x = preprocess_input(x)
 
         X_train[count] = x
@@ -24,7 +25,7 @@ def prepareImages(data, m, dataset):
     return X_train
 
 
-# %% {"_uuid": "6587a101b58af064af0f9c60a1070c6c8f52d45f"}
+# %%
 def prepare_labels(y):
     values = np.array(y)
     label_encoder = LabelEncoder()
@@ -41,11 +42,11 @@ def prepare_labels(y):
     return y, label_encoder
 
 
-# %% {"_uuid": "4afe4128a0cd6859848c8a80686208082d647c39"}
-X = prepareImages(train_df, train_df.shape[0], "train")
+# %%
+X = prepareImages(train_df, train_df.shape[0], PATH_INPUT / "train")
 X /= 255
 
-# %% {"_uuid": "675924f8863aef27cf90dc668e0a68cd609dfc1c"}
+# %%
 y, label_encoder = prepare_labels(train_df['Id'])
 
 # %% {"_uuid": "14d243b19023e830b636bea16679e13bc40deae6"}

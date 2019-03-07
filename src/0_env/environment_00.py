@@ -45,17 +45,20 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mplimg
 from matplotlib.pyplot import imshow
 
-
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
-import sklearn as sk
 import sklearn.preprocessing
+# from sklearn.preprocessing import LabelEncoder
+# from sklearn.preprocessing import OneHotEncoder
+# import sklearn.preprocessing
+import sklearn.model_selection
+import sklearn as sk
+
 
 # %%
 # Deep learning stack
 # TODO: This should also be available in tensorflow, eliminate the keras dep
 from keras.applications.imagenet_utils import preprocess_input
-
+# import keras
+# keras.applications.imagenet_utils.preprocess_input
 import tensorflow as tf
 
 # tf.keras.layers
