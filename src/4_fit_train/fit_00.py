@@ -1,4 +1,8 @@
 
+# %%
+history = model.fit(X_tr, y_tr, epochs=5, batch_size=100, verbose=1)
+gc.collect()
+
 # %% {"_uuid": "7bca48a1d0963cbf70685b75431435cef9499895"}
 plt.plot(history.history['acc'])
 plt.title('Model accuracy')
