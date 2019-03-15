@@ -1,4 +1,3 @@
-
 # %% {"_uuid": "f46b24dbba74f22833cac6140e60348b15a8e047"}
 
 # data=train_df
@@ -32,7 +31,7 @@ def prepare_labels(y):
     integer_encoded = label_encoder.fit_transform(values)
     # print(integer_encoded)
 
-    onehot_encoder = OneHotEncoder(sparse=False)
+    onehot_encoder = sk.preprocessing.OneHotEncoder(sparse=False)
     integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)
     onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
     # print(onehot_encoded)
