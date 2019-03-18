@@ -1,5 +1,7 @@
 
 # %%
+
+
 history = model.fit(X_tr, y_tr, epochs=5, batch_size=100, verbose=1)
 gc.collect()
 

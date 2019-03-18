@@ -37,21 +37,43 @@ def prepare_labels(y):
     # print(onehot_encoded)
 
     y = onehot_encoded
-    # print(y.shape)
     return y, label_encoder
 
+#%%
+PATH_ASSETS = Path.cwd() / 'assets'
+assert PATH_ASSETS.exists()
+PATH_DATASET = PATH_ASSETS / 'dataset.h5'
 
-# %%
-X_tr = prepareImages(df_tr, df_tr.shape[0], PATH_INPUT / "train")
-X_tr /= 255
+#%%
+if PATH_DATASET.exists():
+    # Load the dataset
+    with h5py.File(PATH_DATASET, 'r') as hf:
+        print([k for k in hf.keys()])
+        # x_tr = hf['X_tr'].value
+        X_tr = hf['X_tr'][()]
+        X_cv = hf['X_cv'][()]
+        y_tr = hf['y_tr'][()]
+        y_cv = hf['y_cv'][()]
 
-X_cv = prepareImages(df_cv, df_cv.shape[0], PATH_INPUT / "train")
-X_cv /= 255
+else:
+    # Create the dataset and save
 
-# %%
-y_tr, label_encoder_tr = prepare_labels(df_tr['Id'])
-y_cv, label_encoder_cv = prepare_labels(df_cv['Id'])
+    X_tr = prepareImages(df_tr, df_tr.shape[0], PATH_INPUT / "train")
+    X_tr /= 255
 
-# %% {"_uuid": "14d243b19023e830b636bea16679e13bc40deae6"}
-y_tr.shape
-y_cv.shape
+    X_cv = prepareImages(df_cv, df_cv.shape[0], PATH_INPUT / "train")
+    X_cv /= 255
+
+    # %%
+    y_tr, label_encoder_tr = prepare_labels(df_tr['Id'])
+    y_cv, label_encoder_cv = prepare_labels(df_cv['Id'])
+
+    with h5py.File(PATH_DATASET, 'w') as hf:
+        hf.create_dataset('X_tr', data=X_tr)
+        hf.create_dataset('X_cv', data=X_cv)
+        hf.create_dataset('y_tr', data=y_tr)
+        hf.create_dataset('y_cv', data=y_cv)
+
+
+
+
