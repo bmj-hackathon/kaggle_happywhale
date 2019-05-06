@@ -46,6 +46,7 @@ PATH_DATASET = PATH_ASSETS / 'dataset.h5'
 
 #%%
 if PATH_DATASET.exists():
+    logging.info("Dataset hdf5 file found, loading.".format())
     # Load the dataset
     with h5py.File(PATH_DATASET, 'r') as hf:
         print([k for k in hf.keys()])
@@ -57,6 +58,7 @@ if PATH_DATASET.exists():
 
 else:
     # Create the dataset and save
+    logging.info("Dataset hdf5 file not found, converting images to numpy.".format())
 
     X_tr = prepareImages(df_tr, df_tr.shape[0], PATH_INPUT / "train")
     X_tr /= 255
@@ -67,6 +69,8 @@ else:
     # %%
     y_tr, label_encoder_tr = prepare_labels(df_tr['Id'])
     y_cv, label_encoder_cv = prepare_labels(df_cv['Id'])
+
+    logging.info("Saving to {}".format(PATH_DATASET))
 
     with h5py.File(PATH_DATASET, 'w') as hf:
         hf.create_dataset('X_tr', data=X_tr)

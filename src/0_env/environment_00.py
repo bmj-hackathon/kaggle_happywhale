@@ -28,14 +28,6 @@ warnings.simplefilter("ignore", category=DeprecationWarning)
 
 from pathlib import Path
 
-
-#%%
-# Ensure CUDA paths!
-import os
-from pathlib import Path
-assert "LD_LIBRARY_PATH" in os.environ
-assert "/usr/local/cuda-9.0/bin" in [p for p in os.environ['PATH'].split(':')]
-
 #%%
 # Scientific stack
 import numpy as np
@@ -52,6 +44,13 @@ import sklearn.model_selection
 import sklearn as sk
 
 import h5py
+
+
+logging.info("{:>10}=={} as {}".format('numpy', np.__version__, 'np'))
+logging.info("{:>10}=={} as {}".format('pandas', pd.__version__, 'pd'))
+logging.info("{:>10}=={} as {}".format('sklearn', sk.__version__, 'sk'))
+logging.info("{:>10}=={} as {}".format('matplotlib', mpl.__version__, 'mpl'))
+
 # %%
 # Deep learning stack
 # TODO: This should also be available in tensorflow, eliminate the keras dep
@@ -76,6 +75,18 @@ import tensorflow as tf
 #
 # import tensorflow.keras.backend as K
 # from tensorflow.keras.models import Sequential
+
+#%%
+import kaggle_utils
+from kaggle_utils.util_keras_tensorflow import get_available_gpus, assert_cuda_paths
+
+assert_cuda_paths()
+
+# Ensure CUDA paths!
+import os
+from pathlib import Path
+assert "LD_LIBRARY_PATH" in os.environ
+assert "/usr/local/cuda-9.0/bin" in [p for p in os.environ['PATH'].split(':')]
 
 #%%
 

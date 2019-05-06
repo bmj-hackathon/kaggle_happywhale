@@ -44,7 +44,8 @@ for i, img_path in enumerate(sel_img_paths):
     ax.imshow(img)
     ax.axis('off')
     # plt.title(str_label)
-plt.show()
+if 0:
+    plt.show()
 # outpath = os.path.join(dataset.path_dataset, outfname)
 # fig.savefig(outpath)
 # logging.debug("Wrote Sample Frames figure to {}".format(outpath))
